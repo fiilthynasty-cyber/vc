@@ -1,8 +1,3 @@
-import tailwindcss from '@tailwindcss/vite';
-import react from '@vitejs/plugin-react';
-import path from 'path';
-import { defineConfig, loadEnv } from 'vite';
-
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '');
 
@@ -17,17 +12,18 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
-      // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      // Do not modify—file watching is disabled to prevent flickering during agent edits.
+      host: '0.0.0.0',  // crucial for Render
+      port: 3000,
       hmr: process.env.DISABLE_HMR !== 'true',
-      host: '0.0.0.0',  // Ensure Render can detect the port
+    },
+    preview: {
+      host: '0.0.0.0',  // crucial for Render preview
       port: 3000,
     },
     build: {
-      chunkSizeWarningLimit: 1000, // Increase limit from 500KB to 1MB
+      chunkSizeWarningLimit: 1000, // increase chunk size warning limit
       rollupOptions: {
         output: {
-          // Optional: manually split big chunks to reduce warnings
           manualChunks(id) {
             if (id.includes('node_modules')) {
               return 'vendor';
