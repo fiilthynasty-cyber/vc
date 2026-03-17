@@ -1,30 +1,26 @@
-import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import { defineConfig, loadEnv } from 'vite';
 
 export default defineConfig(({ mode }) => {
-  // Load environment variables
   const env = loadEnv(mode, process.cwd(), '');
-
   return {
-    plugins: [react(), tailwindcss()],
-    define: {
-      'process.env': env
-    },
+    plugins: [react()],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, 'src')
+        '@': path.resolve(__dirname, './src')
       }
     },
-    server: {
-      hmr: process.env.DISABLE_HMR !== 'true'
+    define: {
+      'import.meta.env.VITE_SUPABASE_URL': JSON.stringify(env.VITE_SUPABASE_URL),
+      'import.meta.env.VITE_SUPABASE_KEY': JSON.stringify(env.VITE_SUPABASE_KEY)
     },
     preview: {
-      allowedHosts: ['vc-c9mc.onrender.com', 'localhost']
+      allowedHosts: ['vc-c9mc.onrender.com']
     },
-    build: {
-      chunkSizeWarningLimit: 1000 // increase limit to ignore warnings
+    server: {
+      port: 3000,
+      host: '0.0.0.0'
     }
   };
 });
