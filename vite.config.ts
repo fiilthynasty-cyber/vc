@@ -1,6 +1,10 @@
-export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, '.', '');
+import tailwindcss from '@tailwindcss/vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
+import { defineConfig, loadEnv } from 'vite';
 
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd());
   return {
     plugins: [react(), tailwindcss()],
     define: {
@@ -12,25 +16,15 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
-      host: '0.0.0.0',  // crucial for Render
+      host: '0.0.0.0',
       port: 3000,
-      hmr: process.env.DISABLE_HMR !== 'true',
     },
     preview: {
-      host: '0.0.0.0',  // crucial for Render preview
-      port: 3000,
+      host: '0.0.0.0',
+      port: process.env.PORT ? Number(process.env.PORT) : 10000
     },
     build: {
-      chunkSizeWarningLimit: 1000, // increase chunk size warning limit
-      rollupOptions: {
-        output: {
-          manualChunks(id) {
-            if (id.includes('node_modules')) {
-              return 'vendor';
-            }
-          },
-        },
-      },
-    },
+      chunkSizeWarningLimit: 1000 // avoid large chunk warnings
+    }
   };
 });
