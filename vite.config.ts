@@ -4,29 +4,27 @@ import path from 'path';
 import { defineConfig, loadEnv } from 'vite';
 
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd());
+  // Load environment variables
+  const env = loadEnv(mode, process.cwd(), '');
 
   return {
     plugins: [react(), tailwindcss()],
     define: {
-      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+      'process.env': env
     },
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, '.'),
-      },
+        '@': path.resolve(__dirname, 'src')
+      }
     },
     server: {
-      host: '0.0.0.0',
-      port: 3000,
+      hmr: process.env.DISABLE_HMR !== 'true'
     },
     preview: {
-      host: '0.0.0.0',
-      port: process.env.PORT ? Number(process.env.PORT) : 10000,
-      allowedHosts: ['vc-c9mc.onrender.com'], // <-- Add your Render domain here
+      allowedHosts: ['vc-c9mc.onrender.com', 'localhost']
     },
     build: {
-      chunkSizeWarningLimit: 1000, // avoid large chunk warnings
-    },
+      chunkSizeWarningLimit: 1000 // increase limit to ignore warnings
+    }
   };
 });
