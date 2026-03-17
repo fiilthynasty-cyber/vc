@@ -1,13 +1,12 @@
-import React from "react";
-import Button from "./components/Button.jsx";
-
 function App() {
+  const handleClick = () => {
+    alert("🔥 It works!");
+  };
+
   return (
     <div className="p-4">
       <h1 className="text-3xl font-bold mb-4">QPOS SaaS</h1>
-      <Button>Click me!</Button>
+      <Button onClick={handleClick}>Click me!</Button>
     </div>
   );
 }
-
-export default App;
