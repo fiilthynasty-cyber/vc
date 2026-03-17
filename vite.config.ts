@@ -5,6 +5,7 @@ import { defineConfig, loadEnv } from 'vite';
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd());
+
   return {
     plugins: [react(), tailwindcss()],
     define: {
@@ -21,10 +22,11 @@ export default defineConfig(({ mode }) => {
     },
     preview: {
       host: '0.0.0.0',
-      port: process.env.PORT ? Number(process.env.PORT) : 10000
+      port: process.env.PORT ? Number(process.env.PORT) : 10000,
+      allowedHosts: ['vc-c9mc.onrender.com'], // <-- Add your Render domain here
     },
     build: {
-      chunkSizeWarningLimit: 1000 // avoid large chunk warnings
-    }
+      chunkSizeWarningLimit: 1000, // avoid large chunk warnings
+    },
   };
 });
