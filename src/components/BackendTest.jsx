@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { supabase } from "../supabaseClient"; // import the client
+import { supabase } from "../supabaseClient"; // Make sure this exists
 
 export default function BackendTest() {
   const [data, setData] = useState([]);
@@ -16,8 +16,8 @@ export default function BackendTest() {
 
   return (
     <div>
-      <h2>Backend Test</h2>
-      {error ? <p>Error: {error}</p> : <pre>{JSON.stringify(data, null, 2)}</pre>}
+      <h2 className="font-orbitron text-sm neon-green mb-2">Backend Test</h2>
+      {error ? <p className="text-red-500">{error}</p> : <pre className="font-mono-tech">{JSON.stringify(data, null, 2)}</pre>}
     </div>
   );
 }
