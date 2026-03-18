@@ -1,32 +1,22 @@
-import React, { useState } from "react";
-import { createClient } from "@supabase/supabase-js";
+import React, { useEffect, useState } from "react";
+import { supabase } from "../supabaseClient";
 
-const supabaseUrl = "https://xyzcompany.supabase.co";
-const supabaseAnonKey = "YOUR_ANON_KEY";
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export default function Backendtest() {
+  const [status, setStatus] = useState("Connecting…");
 
-export default function BackendTest() {
-  const [status, setStatus] = useState("Not tested");
+  useEffect(() => {
+    supabase
+      .from("your_table") // replace with a real table in your Supabase project
+      .select("*")
+      .then(({ data, error }) => {
+        if (error) {
+          console.error(error);
+          setStatus("Error connecting to backend");
+        } else {
+          setStatus("Connected successfully!");
+        }
+      });
+  }, []);
 
-  const testBackend = async () => {
-    try {
-      const { data, error } = await supabase.from("test").select("*");
-      if (error) throw error;
-      setStatus("Backend connected! Rows: " + data.length);
-    } catch {
-      setStatus("Error connecting to backend");
-    }
-  };
-
-  return (
-    <div className="mb-8 text-center">
-      <button
-        onClick={testBackend}
-        className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition"
-      >
-        Test Backend Connection
-      </button>
-      <p className="mt-2 text-lg">{status}</p>
-    </div>
-  );
+  return <div className="text-center p-4">{status}</div>;
 }
