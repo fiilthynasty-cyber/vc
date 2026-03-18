@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../supabaseClient"; // import the client
 
-export default function Backendtest() {
-  const [status, setStatus] = useState("Connecting…");
+export default function BackendTest() {
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    supabase
-      .from("your_table") // replace with a real table in your Supabase project
-      .select("*")
-      .then(({ data, error }) => {
-        if (error) {
-          console.error(error);
-          setStatus("Error connecting to backend");
-        } else {
-          setStatus("Connected successfully!");
-        }
-      });
+    async function fetchData() {
+      const { data, error } = await supabase.from("test_table").select("*");
+      if (error) setError(error.message);
+      else setData(data);
+    }
+    fetchData();
   }, []);
 
-  return <div className="text-center p-4">{status}</div>;
+  return (
+    <div>
+      <h2>Backend Test</h2>
+      {error ? <p>Error: {error}</p> : <pre>{JSON.stringify(data, null, 2)}</pre>}
+    </div>
+  );
 }
