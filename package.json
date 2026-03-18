@@ -1,25 +1,22 @@
 {
-  "name": "fiilthynasty-cyber",
+  "name": "vc-app",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "start": "vite preview --host 0.0.0.0 --port $PORT"
+    "preview": "vite preview --host 0.0.0.0 --port $PORT"
   },
   "dependencies": {
     "react": "^18.3.0",
-    "react-dom": "^18.3.0",
-    "@supabase/supabase-js": "^2.50.2"
+    "react-dom": "^18.3.0"
   },
   "devDependencies": {
+    "tailwindcss": "^3.5.3",
+    "postcss": "^8.4.28",
+    "autoprefixer": "^10.4.15",
     "vite": "^6.4.1",
-    "@vitejs/plugin-react": "^4.0.0",
-    "@tailwindcss/vite": "^4.2.1",
-    "tailwindcss": "^4.2.1"
-  },
-  "engines": {
-    "node": "22.x"
+    "@vitejs/plugin-react": "^4.0.0"
   }
 }
