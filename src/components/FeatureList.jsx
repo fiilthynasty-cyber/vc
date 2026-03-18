@@ -1,14 +1,22 @@
 import React from "react";
 
 export default function FeatureList() {
+  const features = [
+    "Modular Prompt Builder",
+    "Random Casino Spinner",
+    "System Health Monitor",
+    "Backend Testing",
+    "Supabase Integration",
+    "Full AI Stack Ready",
+  ];
+
   return (
-    <div className="w-full max-w-xl bg-white p-6 rounded shadow-md">
-      <h2 className="text-2xl font-semibold mb-4">Features Ready:</h2>
-      <ul className="list-disc pl-5 space-y-2">
-        <li>React + Vite</li>
-        <li>Tailwind CSS v3.5.3</li>
-        <li>Supabase Backend Integration</li>
-        <li>Deploy-ready for Render</li>
+    <div className="mt-6">
+      <h3 className="font-orbitron text-xs neon-green mb-2">FEATURES</h3>
+      <ul className="font-mono-tech text-gray-400 list-disc list-inside">
+        {features.map((f, i) => (
+          <li key={i}>{f}</li>
+        ))}
       </ul>
     </div>
   );
