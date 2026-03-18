@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./components/Header";
-import BackendTest from "./components/BackendTest";
+import BackendTest from "./components/Backendtest";
 import FeatureList from "./components/FeatureList";
 
 export default function App() {
