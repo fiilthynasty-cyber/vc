@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./components/Header";
-import BackendTest from "./components/Backendtest";
+import BackendTest from "./components/BackendTest";
 import FeatureList from "./components/Featurelist"; // matches the filename exactly
 
 export default function App() {
