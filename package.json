@@ -1,32 +1,8 @@
-{
-  "name": "vc-app",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@supabase/supabase-js": "2.31.0"
-  },
-  "devDependencies": {
-    "vite": "^4.3.9",
-    "@vitejs/plugin-react": "^4.0.0",
-    "tailwindcss": "3.3.3",
-    "postcss": "8.4.27",
-    "autoprefixer": "10.4.14"
-  },
-  "engines": {
-    "node": ">=22.0.0"
-  }
-}
-{
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  }
-}
+2026-03-19T02:02:34.931970308Z ==> Downloading cache...
+2026-03-19T02:02:34.973478906Z ==> Cloning from https://github.com/fiilthynasty-cyber/vc
+2026-03-19T02:02:35.462230475Z ==> Checking out commit 3b8f972ed219bfa8f919881d8d9dd5efa6025217 in branch main
+2026-03-19T02:02:42.594412747Z ==> Downloaded 227MB in 3s. Extraction took 5s.
+2026-03-19T02:02:49.082581602Z ==> Requesting Node.js version >=22.0.0
+2026-03-19T02:02:49.082595212Z null
+2026-03-19T02:02:49.188516902Z ==> Invalid node version specification '>=22.0.0
+2026-03-19T02:02:49.188537872Z null'
