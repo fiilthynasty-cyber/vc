@@ -1,8 +1,27 @@
-2026-03-19T02:02:34.931970308Z ==> Downloading cache...
-2026-03-19T02:02:34.973478906Z ==> Cloning from https://github.com/fiilthynasty-cyber/vc
-2026-03-19T02:02:35.462230475Z ==> Checking out commit 3b8f972ed219bfa8f919881d8d9dd5efa6025217 in branch main
-2026-03-19T02:02:42.594412747Z ==> Downloaded 227MB in 3s. Extraction took 5s.
-2026-03-19T02:02:49.082581602Z ==> Requesting Node.js version >=22.0.0
-2026-03-19T02:02:49.082595212Z null
-2026-03-19T02:02:49.188516902Z ==> Invalid node version specification '>=22.0.0
-2026-03-19T02:02:49.188537872Z null'
+{
+  "name": "vc-app",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "start": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@tsparticles/react": "^2.12.2",
+    "@tsparticles/engine": "^2.12.0"
+  },
+  "devDependencies": {
+    "vite": "^4.5.14",
+    "@vitejs/plugin-react": "^4.2.0",
+    "tailwindcss": "^3.4.0",
+    "postcss": "^8.4.35",
+    "autoprefixer": "^10.4.19"
+  },
+  "engines": {
+    "node": "22.x"
+  }
+}
