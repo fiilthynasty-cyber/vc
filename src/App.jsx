@@ -1,61 +1,30 @@
-// src/App.jsx
-import React from "react";
+import { useCallback } from "react";
 import Particles from "@tsparticles/react";
-import { loadFull } from "@tsparticles/engine";
+import { loadFull } from "tsparticles";
 
 function App() {
-  // Initialize tsparticles engine
-  const particlesInit = async (engine) => {
+  const particlesInit = useCallback(async (engine) => {
     await loadFull(engine);
-  };
-
-  // Particle options
-  const particlesOptions = {
-    background: {
-      color: { value: "#0f172a" }, // Tailwind slate-900
-    },
-    fpsLimit: 60,
-    particles: {
-      color: { value: "#ffffff" },
-      links: {
-        color: "#ffffff",
-        distance: 150,
-        enable: true,
-        opacity: 0.3,
-        width: 1,
-      },
-      move: {
-        enable: true,
-        speed: 2,
-      },
-      number: {
-        value: 50,
-      },
-      opacity: {
-        value: 0.5,
-      },
-      size: {
-        value: { min: 1, max: 4 },
-      },
-    },
-    detectRetina: true,
-  };
+  }, []);
 
   return (
-    <div className="relative h-screen w-screen overflow-hidden">
-      {/* Particles Background */}
-      <Particles init={particlesInit} options={particlesOptions} />
+    <div className="h-screen w-screen bg-black text-white flex items-center justify-center">
+      <Particles
+        id="tsparticles"
+        init={particlesInit}
+        options={{
+          background: { color: "#000" },
+          particles: {
+            number: { value: 50 },
+            size: { value: 3 },
+            move: { enable: true, speed: 2 }
+          }
+        }}
+      />
 
-      {/* Main Content */}
-      <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
-        <h1 className="text-5xl font-bold mb-4">VC App</h1>
-        <p className="text-lg mb-8">
-          Welcome to your Vite + React + Tailwind + Particles setup!
-        </p>
-        <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg shadow-lg transition">
-          Get Started
-        </button>
-      </div>
+      <h1 className="text-4xl font-bold z-10">
+        🚀 FiiLTHY AI APP
+      </h1>
     </div>
   );
 }
