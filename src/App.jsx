@@ -1,39 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Particles from "@tsparticles/react";
 import { loadFull } from "tsparticles";
 
-// Your live backend URL
-const API_URL = "https://one-shxr.onrender.com";
+const API_URL = "https://one-shxr.onrender.com"; // your backend URL
 
 export default function App() {
-  const [data, setData] = useState(null); // store backend data
-  const [loading, setLoading] = useState(true); // loading state
+  const [prompt, setPrompt] = useState(""); // store generated prompt
+  const [loading, setLoading] = useState(false); // loading state
   const [error, setError] = useState(null); // error state
 
   const particlesInit = async (engine) => {
     await loadFull(engine);
   };
 
-  // Fetch data from backend on component mount
-  useEffect(() => {
-    fetch(`${API_URL}/api/your-endpoint`) // <-- Replace with your actual backend route
-      .then((res) => {
-        if (!res.ok) throw new Error("Network response not OK");
-        return res.json();
-      })
-      .then((d) => {
-        setData(d);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        setError("Failed to fetch data from backend");
-        setLoading(false);
-      });
-  }, []);
+  // Function to fetch a new prompt
+  const generatePrompt = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch(`${API_URL}/api/generate-prompt`);
+      if (!res.ok) throw new Error("Failed to fetch prompt");
+      const data = await res.json();
+      setPrompt(data.prompt);
+    } catch (err) {
+      console.error(err);
+      setError("Could not generate prompt.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="h-screen w-screen bg-black text-white flex flex-col items-center justify-center">
+    <div className="h-screen w-screen bg-black text-white flex flex-col items-center justify-center p-4">
       {/* Particle background */}
       <Particles
         id="tsparticles"
@@ -49,20 +47,25 @@ export default function App() {
         }}
       />
 
-      {/* App Title */}
+      {/* Title */}
       <h1 className="text-4xl z-10 mb-4">FiiLTHY AI 🚀</h1>
 
-      {/* Loading state */}
-      {loading && <p className="z-10">Loading data...</p>}
+      {/* Generate Button */}
+      <button
+        onClick={generatePrompt}
+        className="z-10 px-6 py-3 bg-purple-600 rounded-lg hover:bg-purple-700 transition"
+      >
+        {loading ? "Generating..." : "Generate Prompt"}
+      </button>
 
-      {/* Error state */}
-      {error && <p className="z-10 text-red-500">{error}</p>}
+      {/* Error */}
+      {error && <p className="z-10 text-red-500 mt-2">{error}</p>}
 
-      {/* Display backend data */}
-      {data && (
-        <pre className="z-10 bg-gray-900 p-4 rounded">
-          {JSON.stringify(data, null, 2)}
-        </pre>
+      {/* Generated Prompt */}
+      {prompt && (
+        <div className="z-10 mt-4 bg-gray-900 p-4 rounded max-w-xl text-center">
+          {prompt}
+        </div>
       )}
     </div>
   );
