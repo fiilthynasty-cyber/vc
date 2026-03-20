@@ -1,21 +1,22 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+
 const PORT = process.env.PORT || 5000;
 
-// Serve React static files
-app.use(express.static(path.join(__dirname, 'client', 'build')));
-
-// API example
+// API route
 app.get('/api', (req, res) => {
-  res.json({ message: 'Hello from server!' });
+  res.json({ message: '🔥 API working' });
 });
 
-// All other requests serve React app
+// Serve React build
+app.use(express.static(path.join(__dirname, 'client', 'build')));
+
+// Catch all → React
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
 });
