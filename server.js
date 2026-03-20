@@ -9,7 +9,3 @@ app.use(express.json());
 app.get('/api', (req, res) => {
   res.json({ message: '🔥 Backend working' });
 });
-
-app.listen(PORT, () => {
-  console.log(`✅ Server running on port ${PORT}`);
-});
