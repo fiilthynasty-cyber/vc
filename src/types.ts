@@ -73,10 +73,18 @@ export interface IdeaGenome {
 }
 
 export interface MarketResearch {
-  competitors: string[];
-  pricingModels: string[];
+  competitors: {
+    name: string;
+    swot: {
+      strengths: string[];
+      weaknesses: string[];
+      opportunities: string[];
+      threats: string[];
+    };
+  }[];
+  pricingTrends: string[];
   marketSize: string;
-  trends: string[];
+  futureTrends: string[];
 }
 
 export interface IdeaEcosystem {
@@ -93,6 +101,60 @@ export interface TimeMachine {
 export interface InnovationExperiment {
   experiment: string;
   result: string;
+}
+
+export interface FullStackBlueprint {
+  concept: {
+    name: string;
+    description: string;
+    targetAudience: string;
+    monetizationStrategy: string;
+    aiEnhancements: string[];
+  };
+  coreFeatures: { title: string; description: string; futuristic: boolean }[];
+  techStack: {
+    frontend: { framework: string; libraries: string[]; reason: string };
+    backend: { framework: string; apis: string[]; reason: string };
+    database: { type: string; reason: string };
+    cloudDevOps: { provider: string; strategy: string; reason: string };
+  };
+  security: {
+    inputValidation: string;
+    rateLimiting: string;
+    csrfXss: string;
+    apiKeyManagement: string;
+    threatDetection: string;
+    deploymentSecurity: string;
+  };
+  buildPrompts: {
+    frontend: string;
+    backend: string;
+    database: string;
+    deployment: string;
+  };
+  viralGrowth: {
+    referralSystem: string;
+    viralHooks: string[];
+    socialMediaLoop: string;
+  };
+  moneyEngine: {
+    revenueStreams: string[];
+    pricingTiers: { tier: string; price: string; features: string[] }[];
+    upsells: string[];
+  };
+  futureProof: {
+    autoUpdates: string;
+    refactoringSuggestions: string;
+    blockchainIntegration?: string;
+    predictiveAnalytics: string;
+  };
+  quantumAnalysis: {
+    scores: { clarity: number; originality: number; impact: number };
+    weakAreas: string[];
+    improvements: string[];
+    marketReadiness: string;
+  };
+  ideaJackpotSpinOffs: { tech: string; industry: string; trigger: string; idea: string }[];
 }
 
 export interface QuantumResult {
@@ -118,7 +180,6 @@ export interface QuantumResult {
     hiddenCreativity: string;
     suggestedShift: string;
   };
-  // Futuristic Features
   digitalTwin?: DigitalTwin;
   builder?: BuilderOutput;
   negotiation?: NegotiationSim[];
@@ -129,9 +190,55 @@ export interface QuantumResult {
   ecosystem?: IdeaEcosystem;
   timeMachine?: TimeMachine;
   experiments?: InnovationExperiment[];
+  // Ultra-Futuristic Features (10 Years Ahead)
+  neuralSynthesis?: {
+    figures: string[];
+    combinedInsight: string;
+  };
+  entanglement?: {
+    trend: string;
+    impact: string;
+  }[];
+  sentiencePath?: string;
+  butterflyEffect?: string;
+  ethicalParadox?: {
+    dilemma: string;
+    solution: string;
+  };
+  syntheticFocusGroup?: {
+    persona: string;
+    feedback: string;
+  }[];
+  postScarcityAdaptation?: string;
+  fullStackBlueprint?: FullStackBlueprint;
+  strategicBlueprint?: {
+    designSystem: {
+      philosophy: string;
+      visualDirection: string;
+      coreComponents: string[];
+    };
+    detailedOutline: {
+      phase: string;
+      objectives: string[];
+      deliverables: string[];
+    }[];
+    predictiveMilestones: {
+      timeframe: string;
+      event: string;
+      probability: number;
+      impact: string;
+    }[];
+    setupPath: {
+      step: number;
+      action: string;
+      tool: string;
+      expectedResult: string;
+    }[];
+  };
 }
 
 export interface CasinoResult {
+  type: 'Startup' | 'Viral Content' | 'Automation Business';
   tech: string;
   industry: string;
   trigger: string;
