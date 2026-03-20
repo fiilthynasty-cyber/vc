@@ -6,14 +6,18 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
 
   return {
-    plugins: [react()],             // remove tailwindcss() here
-    css: { postcss: './postcss.config.js' }, // ensures Tailwind runs
+    plugins: [react()], // Tailwind removed here
+    css: { postcss: './postcss.config.js' }, // uses Tailwind via PostCSS
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
     },
     resolve: {
-      alias: { '@': path.resolve(__dirname, '.') },
+      alias: {
+        '@': path.resolve(__dirname, '.'),
+      },
     },
-    server: { hmr: process.env.DISABLE_HMR !== 'true' },
+    server: {
+      hmr: process.env.DISABLE_HMR !== 'true',
+    },
   };
 });
