@@ -1,72 +1,79 @@
-import React, { useState } from "react";
-import Particles from "@tsparticles/react";
-import { loadFull } from "tsparticles";
+import { useState } from "react";
 
-const API_URL = "https://one-shxr.onrender.com"; // your backend URL
+function App() {
+  const [input, setInput] = useState("");
+  const [output, setOutput] = useState("");
+  const [uses, setUses] = useState(3);
 
-export default function App() {
-  const [prompt, setPrompt] = useState(""); // store generated prompt
-  const [loading, setLoading] = useState(false); // loading state
-  const [error, setError] = useState(null); // error state
-
-  const particlesInit = async (engine) => {
-    await loadFull(engine);
-  };
-
-  // Function to fetch a new prompt
-  const generatePrompt = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await fetch(`${API_URL}/api/generate-prompt`);
-      if (!res.ok) throw new Error("Failed to fetch prompt");
-      const data = await res.json();
-      setPrompt(data.prompt);
-    } catch (err) {
-      console.error(err);
-      setError("Could not generate prompt.");
-    } finally {
-      setLoading(false);
+  const generate = () => {
+    if (!input) {
+      alert("Type something first");
+      return;
     }
+
+    if (uses <= 0) {
+      alert("🔒 You ran out of free uses. Upgrade coming soon.");
+      return;
+    }
+
+    setUses(uses - 1);
+
+    // Fake AI output (we upgrade this next)
+    const result = `
+🔥 MONEY IDEA GENERATED:
+
+You typed: "${input}"
+
+Here’s how to turn this into money:
+
+1. Create content around it (TikTok, YouTube, posts)
+2. Turn it into a digital product (ebook or guide)
+3. Promote it using AI tools
+4. Add affiliate links or sell it
+
+💰 Goal: Turn this into income within 7 days
+`;
+
+    setOutput(result);
   };
 
   return (
-    <div className="h-screen w-screen bg-black text-white flex flex-col items-center justify-center p-4">
-      {/* Particle background */}
-      <Particles
-        id="tsparticles"
-        init={particlesInit}
-        options={{
-          background: { color: "#000000" },
-          particles: {
-            number: { value: 80 },
-            size: { value: 3 },
-            move: { enable: true, speed: 2 },
-            links: { enable: true, color: "#ffffff" },
-          },
-        }}
-      />
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-start p-6">
+      
+      <h1 className="text-4xl font-bold mb-6 text-center">
+        💰 AI MONEY MACHINE
+      </h1>
 
-      {/* Title */}
-      <h1 className="text-4xl z-10 mb-4">FiiLTHY AI 🚀</h1>
+      <div className="w-full max-w-xl bg-white p-6 rounded-2xl shadow-md">
+        
+        <textarea
+          className="w-full p-4 border rounded-xl mb-4"
+          rows="4"
+          placeholder="Type something like: 'fitness', 'crypto', 'AI business'..."
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
 
-      {/* Generate Button */}
-      <button
-        onClick={generatePrompt}
-        className="z-10 px-6 py-3 bg-purple-600 rounded-lg hover:bg-purple-700 transition"
-      >
-        {loading ? "Generating..." : "Generate Prompt"}
-      </button>
+        <button
+          onClick={generate}
+          className="w-full bg-black text-white py-3 rounded-xl text-lg"
+        >
+          Generate 💰
+        </button>
 
-      {/* Error */}
-      {error && <p className="z-10 text-red-500 mt-2">{error}</p>}
+        <p className="mt-3 text-sm text-gray-600 text-center">
+          Free uses left: {uses}
+        </p>
 
-      {/* Generated Prompt */}
-      {prompt && (
-        <div className="z-10 mt-4 bg-gray-900 p-4 rounded max-w-xl text-center">
-          {prompt}
-        </div>
-      )}
+        {output && (
+          <div className="mt-6 p-4 border rounded-xl whitespace-pre-wrap bg-gray-50">
+            {output}
+          </div>
+        )}
+
+      </div>
     </div>
   );
 }
+
+export default App;
