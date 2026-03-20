@@ -6,8 +6,10 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
 
   return {
-    plugins: [react()], // Tailwind removed here
-    css: { postcss: './postcss.config.js' }, // uses Tailwind via PostCSS
+    plugins: [react()], // ✅ only React plugin, no Tailwind plugin
+    css: {
+      postcss: './postcss.config.js', // Tailwind runs through PostCSS
+    },
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
     },
